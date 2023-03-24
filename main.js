@@ -1,63 +1,49 @@
-
-function Lamp() {
-  this.name = "Лампа";
-  this.powerOn = false;
-}
-
-Lamp.prototype.turnOn = function() {
-  if (!this.powerOn) {
-    console.log(`${this.name} включена`);
-    this.powerOn = true;
-  } else {
-    console.log(`${this.name} уже включена`);
-  }
-}
-
-Lamp.prototype.turnOff = function() {
-  if (this.powerOn) {
-    console.log(`${this.name} выключена`);
+// Класс прибора
+class Device {
+  constructor(name) {
+    this.name = name;
     this.powerOn = false;
-  } else {
-    console.log(`${this.name} уже выключена`);
+  }
+  
+  turnOn() {
+    if (!this.powerOn) {
+      console.log(`${this.name} включен`);
+      this.powerOn = true;
+    } else {
+      console.log(`${this.name} уже включен`);
+    }
+  }
+  
+  turnOff() {
+    if (this.powerOn) {
+      console.log(`${this.name} выключен`);
+      this.powerOn = false;
+    } else {
+      console.log(`${this.name} уже выключен`);
+    }
   }
 }
 
-
-function TV() {
-  this.name = "Телевизор";
-  this.powerOn = false;
-}
-
-TV.prototype.turnOn = function() {
-  if (!this.powerOn) {
-    console.log(`${this.name} включен`);
-    this.powerOn = true;
-  } else {
-    console.log(`${this.name} уже включен`);
+class Lamp extends Device {
+  constructor() {
+    super("Лампа");
   }
 }
 
-TV.prototype.turnOff = function() {
-  if (this.powerOn) {
-    console.log(`${this.name} выключен`);
-    this.powerOn = false;
-  } else {
-    console.log(`${this.name} уже выключен`);
+class TV extends Device {
+  constructor() {
+    super("Телевизор");
   }
 }
-
 
 const myLamp = new Lamp();
 
-
 const myTV = new TV();
 
-// Создание делегирующей связи [[Prototype]] между лампой и телевизором
-Object.setPrototypeOf(myTV, myLamp);
-
-
-myTV.turnOn(); // Телевизор включен
-myTV.turnOff(); // Телевизор выключен
-myTV.turnOff(); // Телевизор уже выключен
+myLamp.turnOn(); 
+myTV.turnOn(); 
+myLamp.turnOff(); 
+myTV.turnOff(); 
+myTV.turnOff(); 
 
   
